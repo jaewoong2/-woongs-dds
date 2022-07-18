@@ -1,4 +1,5 @@
 import React, { DetailsHTMLAttributes, forwardRef } from 'react'
+import { LightColor } from '../../../styles/theme/constant'
 import { SearchLineIcon } from '../../icons/SearchLineIcon'
 import { InputContainer, Label, Input, PlaceHolder } from './SearchInput.styles'
 
@@ -10,12 +11,12 @@ export type SearchInputContainer = {
   containerClassName?: string
   size?: 'md' | 'sm' | 'lg' | 'full'
   placeholderColor?: string
+  isTyped?: boolean
 }
 
 type SearchInputProps = {
   icon?: React.ReactNode
-} & SearchInputContainer &
-  DetailsHTMLAttributes<HTMLInputElement>
+} & Omit<SearchInputContainer & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>, 'isTyped'>
 
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   (
@@ -24,11 +25,11 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       placeholder,
       fontSize = '18px',
       containerClassName,
-      backgroundColor = '#fff',
-      color = 'black',
+      backgroundColor = LightColor.searchBackGround,
+      color,
       borderRadius = '50px',
       size = 'lg',
-      placeholderColor = '#737373',
+      placeholderColor = LightColor.searchPlaceholderText,
       icon = (
         <div style={{ width: '24px' }}>
           <SearchLineIcon />
@@ -46,12 +47,13 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
         color={color}
         borderRadius={borderRadius}
         containerClassName={containerClassName}
+        isTyped={Boolean(props?.value) ? true : false}
       >
         <Label htmlFor={id}>
           <PlaceHolder placeholderColor={placeholderColor} className="placeholder">
             {placeholder}
           </PlaceHolder>
-          <Input id={id} ref={ref} {...props} />
+          <Input type="search" id={id} ref={ref} {...props} />
         </Label>
         {size !== 'sm' && icon}
       </InputContainer>

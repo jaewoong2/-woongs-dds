@@ -40,12 +40,24 @@ export const InputContainer = styled.div<SearchInputContainer>`
   align-items: center;
   justify-content: space-around;
   padding: 10px 8px;
-  ${({ backgroundColor, fontSize, color, borderRadius, size }) => css`
+  ${({ backgroundColor, fontSize, color, borderRadius, size, isTyped }) => css`
     background-color: ${backgroundColor};
     font-size: ${fontSize};
     color: ${color};
     border-radius: ${borderRadius};
     ${getSize(size)}
+
+    ${isTyped &&
+    css`
+      .placeholder {
+        width: fit-content;
+        overflow: auto;
+        white-space: normal;
+        font-size: inherit;
+        transform: translateY(-100%);
+        transition: transform 0.4s ease;
+      }
+    `}
   `}
   ${getTypoStyle(Typography.Subtitle2)};
   box-shadow: 1px 1px 2px #00000033;

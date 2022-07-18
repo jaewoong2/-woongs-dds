@@ -1,14 +1,14 @@
 import React from 'react'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { TextCard } from '../index'
+import { HashTag } from '../index'
 
 export default {
-  title: 'Atoms/TextCard',
-  component: TextCard,
+  title: 'Atoms/HashTag',
+  component: HashTag,
   argTypes: {},
-} as ComponentMeta<typeof TextCard>
+} as ComponentMeta<typeof HashTag>
 
-const Template: ComponentStory<typeof TextCard> = (args) => {
+const Template: ComponentStory<typeof HashTag> = (args) => {
   return (
     <div
       style={{
@@ -19,13 +19,15 @@ const Template: ComponentStory<typeof TextCard> = (args) => {
         alignItems: 'center',
       }}
     >
-      <TextCard {...args} />
+      <HashTag {...args} />
     </div>
   )
 }
 
 export const Primary = Template.bind({})
 Primary.args = {
-  title: '우리동네 케이크',
-  description: '240개',
+  color: 'black',
+  fontSize: '18px',
+  children: '강남역',
+  backgroundColor: '#8bcce2',
 }

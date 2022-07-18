@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { SearchInput } from '../index'
 
 export default {
-  title: 'Block/SearchInput',
+  title: 'Atoms/SearchInput',
   component: SearchInput,
   argTypes: {},
 } as ComponentMeta<typeof SearchInput>
 
 const Template: ComponentStory<typeof SearchInput> = (args) => {
+  const [value, setValue] = useState('')
+
+  const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value)
+  }
+
   return (
     <div
       style={{
@@ -20,7 +26,7 @@ const Template: ComponentStory<typeof SearchInput> = (args) => {
         backgroundColor: 'black',
       }}
     >
-      <SearchInput {...args} />
+      <SearchInput value={value} onChange={onChangeValue} {...args} />
     </div>
   )
 }
