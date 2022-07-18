@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { Skeleton } from '../Skeleton'
 
-type ImageProps = {
+export type ImageProps = {
   placeholderSrc?: string
   isLoading: boolean
 } & React.ImgHTMLAttributes<HTMLImageElement>
@@ -36,7 +36,7 @@ const ProgressiveImage = React.forwardRef<HTMLImageElement, ImageProps>(
     )
 
     return (
-      <Skeleton width={'100%'} height="250px" borderRadius="8px" isSkeletonShow={isLoading || isImageLoading}>
+      <Skeleton width={'100%'} height="auto" borderRadius="8px" isSkeletonShow={isLoading || isImageLoading}>
         {!isLoading && (
           <img
             ref={ref}
