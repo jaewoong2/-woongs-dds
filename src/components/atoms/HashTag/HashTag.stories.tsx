@@ -29,5 +29,12 @@ Primary.args = {
   color: 'black',
   fontSize: '18px',
   children: '강남역',
-  backgroundColor: '#8bcce2',
+}
+
+export const Background = Template.bind({})
+Background.args = {
+  color: 'black',
+  fontSize: '18px',
+  children: '강남역',
+  backgroundColor: '#b8e0edd3',
 }
