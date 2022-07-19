@@ -19,16 +19,16 @@ const List = ({ children, ...props }: ListProps & React.DetailsHTMLAttributes<HT
 }
 
 const ListItem = ({ children }: ListItemProps) => {
-  return <ListStyle.ListItem>{children}</ListStyle.ListItem>
+  return <ListStyle.ListItem tabIndex={0}>{children}</ListStyle.ListItem>
 }
 
 const ListTitle = ({ children }: ListItemProps) => {
-  return <ListStyle.ListTitle>{children}</ListStyle.ListTitle>
+  return <ListStyle.ListTitle tabIndex={0}>{children}</ListStyle.ListTitle>
 }
 
 const ListImage = ({ ...props }: ListImageProps) => {
   return (
-    <ListStyle.ImageContainer>
+    <ListStyle.ImageContainer tabIndex={0}>
       <Image {...props} width="" height="" />
     </ListStyle.ImageContainer>
   )
