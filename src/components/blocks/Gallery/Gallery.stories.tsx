@@ -22,7 +22,7 @@ const Template: ComponentStory<typeof Gallery> = (args) => {
       }}
     >
       <Gallery {...args}>
-        <Gallery.Image src={shortSrc}>
+        <Gallery.Image href="/" src={shortSrc}>
           <div>Hello</div>
         </Gallery.Image>
         <Gallery.Image src={longSrc}>
