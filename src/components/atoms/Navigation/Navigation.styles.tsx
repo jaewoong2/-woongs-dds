@@ -30,10 +30,16 @@ export const DropBox = styled.div<{ isOpen: boolean }>`
   ${({ isOpen }) =>
     !isOpen
       ? css`
+          width: 0;
+          height: 0;
           opacity: 0;
+          visibility: hidden;
         `
       : css`
+          width: initial;
+          height: initial;
           opacity: 1;
+          visibility: visible;
         `}
   position: absolute;
   top: calc(100%);

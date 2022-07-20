@@ -1,4 +1,4 @@
-import React, { DetailsHTMLAttributes, forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import { LightColor } from '../../../styles/theme/constant'
 import { SearchLineIcon } from '../../icons/SearchLineIcon'
 import { InputContainer, Label, Input, PlaceHolder } from './SearchInput.styles'
