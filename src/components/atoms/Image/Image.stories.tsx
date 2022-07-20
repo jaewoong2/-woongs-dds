@@ -39,5 +39,6 @@ Primary.args = {
 export const Loading = Template.bind({})
 Loading.args = {
   isLoading: true,
+  height: 'auto',
   src: 'https://i.ytimg.com/vi/aXTkswSxmQs/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAjCTJCXnvHyV7fVOinaHDnHwvCgw',
 }

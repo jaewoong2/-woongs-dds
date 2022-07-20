@@ -2,6 +2,7 @@ export const LightColor = {
   /** BackGround Color */
   logoBackGround: '#FFD9D9',
   bannerBackGround: '#FBF7F2',
+  serachSmallBackGround: '#FBF7F2',
   searchBackGround: '#FFFFFF',
   buttonPrimaryBackGround: '#0C73AC',
   buttonNormalBackGround: '#656565',
@@ -14,6 +15,7 @@ export const LightColor = {
   buttonNormalText: '#FFFFFF',
   primaryText: '#0C73AC',
   bannerText: '#000000',
+  navButtonText: '#999999',
   searchPlaceholderText: '#999999',
   inputPlaceholderText: '#8A8A8A',
 }

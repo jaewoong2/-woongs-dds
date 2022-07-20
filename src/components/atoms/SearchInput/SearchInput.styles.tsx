@@ -6,28 +6,31 @@ import { SearchInputContainer } from './index'
 const getSize = (size?: 'sm' | 'md' | 'lg' | 'full') => {
   if (size === 'sm') {
     return css`
-      width: 200px;
+      max-width: 200px;
       font-size: 14px;
+      height: 20px;
     `
   }
 
   if (size === 'md') {
     return css`
-      width: 310px;
+      max-width: 310px;
       font-size: 16px;
+      height: 20px;
     `
   }
 
   if (size === 'lg') {
     return css`
-      width: 620px;
+      max-width: 620px;
       font-size: 18px;
+      height: 25px;
     `
   }
 
   if (size === 'full') {
     return css`
-      width: calc(100% - 50px);
+      max-width: calc(100% - 50px);
       margin: 0 auto;
       font-size: 20px;
     `
@@ -37,15 +40,18 @@ const getSize = (size?: 'sm' | 'md' | 'lg' | 'full') => {
 
 export const InputContainer = styled.div<SearchInputContainer>`
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: space-around;
   padding: 10px 8px;
-  ${({ backgroundColor, fontSize, color, borderRadius, size, isTyped }) => css`
+
+  ${({ backgroundColor, fontSize, color, borderRadius, size, isTyped, boxShadow, maxWidth }) => css`
     background-color: ${backgroundColor};
     font-size: ${fontSize};
     color: ${color};
     border-radius: ${borderRadius};
     ${getSize(size)}
+    max-width: ${maxWidth};
 
     ${isTyped &&
     css`
@@ -58,15 +64,19 @@ export const InputContainer = styled.div<SearchInputContainer>`
         transition: transform 0.4s ease;
       }
     `}
+    ${boxShadow &&
+    css`
+      box-shadow: 1px 1px 2px #00000033;
+    `}
   `}
   ${getTypoStyle(Typography.Subtitle2)};
-  box-shadow: 1px 1px 2px #00000033;
+
   position: relative;
 `
 
 export const Label = styled.label`
   width: calc(100% - 50px);
-  height: fit-content;
+  height: 100%;
 
   display: flex;
   justify-content: center;

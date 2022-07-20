@@ -24,11 +24,7 @@ export const ImageContainer = styled.div`
 `
 
 export const AnchorContainer = styled.a`
-  &:hover {
-    opacity: 0.5;
-    cursor: pointer;
-    transition: opacity 0.3s;
-  }
+  cursor: pointer;
   color: inherit;
   text-decoration: none;
 `
@@ -60,8 +56,6 @@ export const Figure = styled.figure`
     width: calc(100% - 20px);
     padding: 15px 10px;
   }
-
-  transition: opacity 0.3s;
 
   @media screen and (max-width: 400px) {
     margin-bottom: var(--gap);

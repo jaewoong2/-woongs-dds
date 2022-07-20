@@ -7,11 +7,13 @@ export type SearchInputContainer = {
   fontSize?: string
   backgroundColor?: string
   color?: string
+  maxWidth?: string
   borderRadius?: string
   containerClassName?: string
   size?: 'md' | 'sm' | 'lg' | 'full'
   placeholderColor?: string
   isTyped?: boolean
+  boxShadow?: boolean
 }
 
 type SearchInputProps = {
@@ -23,15 +25,17 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
     {
       id,
       placeholder,
+      maxWidth,
       fontSize = '18px',
       containerClassName,
       backgroundColor = LightColor.searchBackGround,
       color,
       borderRadius = '50px',
       size = 'lg',
+      boxShadow = true,
       placeholderColor = LightColor.searchPlaceholderText,
       icon = (
-        <div style={{ width: '24px' }}>
+        <div style={{ width: '24px', display: 'flex' }}>
           <SearchLineIcon />
         </div>
       ),
@@ -47,6 +51,8 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
         color={color}
         borderRadius={borderRadius}
         containerClassName={containerClassName}
+        maxWidth={maxWidth}
+        boxShadow={boxShadow}
         isTyped={Boolean(props?.value) ? true : false}
       >
         <Label htmlFor={id}>

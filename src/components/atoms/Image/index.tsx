@@ -1,10 +1,17 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Skeleton } from '../Skeleton'
 
 export type ImageProps = {
   placeholderSrc?: string
   isLoading: boolean
 } & React.ImgHTMLAttributes<HTMLImageElement>
+
+const getSkeletonHeight = (height?: string) => {
+  if (height === 'auto' || !height) {
+    return '250px'
+  }
+  return height
+}
 
 /*
  * auto: 속성을 포함하지 않는 것과 동일한 브라우저의 기본 지연 로딩 동작입니다.
@@ -36,7 +43,12 @@ const ProgressiveImage = React.forwardRef<HTMLImageElement, ImageProps>(
     )
 
     return (
-      <Skeleton width={'100%'} height="auto" borderRadius="8px" isSkeletonShow={isLoading || isImageLoading}>
+      <Skeleton
+        width={'100%'}
+        height={getSkeletonHeight(props.height?.toLocaleString())}
+        borderRadius="8px"
+        isSkeletonShow={isLoading || isImageLoading}
+      >
         {!isLoading && (
           <img
             ref={ref}
