@@ -1,5 +1,4 @@
 import React from 'react'
-import { Navigation } from '../../atoms'
 import { HeaderContainer } from './Header.styles'
 
 type Props = {
