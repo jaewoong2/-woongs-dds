@@ -1,9 +1,12 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
-import { useDebouncedCallback } from '../../../hooks/useDebounce'
-import { useWindowResize } from '../../../hooks/useWindowResize'
+
 import { Image } from '../../atoms'
 import { AnchorContainer, Figure, ImageContainer } from './Gallery.styles'
 import { getGridRowEnd } from './utils'
+
+import { useDebouncedCallback } from '../../../hooks/useDebounce'
+import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver'
+import { useWindowResize } from '../../../hooks/useWindowResize'
 
 type GalleryProps = {
   children?: React.ReactNode
@@ -11,6 +14,7 @@ type GalleryProps = {
 
 type InitialValueType = {
   addItemRefs: (entitiy: React.RefObject<HTMLAnchorElement>) => void
+  handleLayout: () => void
 }
 
 const GalleryContext = createContext({} as InitialValueType)
@@ -37,15 +41,31 @@ export const Gallery = ({ children }: GalleryProps) => {
   }, [ref, itemRefs, debouncedFunction])
 
   return (
-    <GalleryContext.Provider value={{ addItemRefs: (entitiy) => setItemRefs((prev) => [...prev, entitiy]) }}>
+    <GalleryContext.Provider
+      value={{ addItemRefs: (entitiy) => setItemRefs((prev) => [...prev, entitiy]), handleLayout }}
+    >
       <ImageContainer ref={ref}>{children}</ImageContainer>
     </GalleryContext.Provider>
   )
 }
 
 const GalleryImage = ({ src, children, href }: React.ImgHTMLAttributes<HTMLImageElement> & { href?: string }) => {
+  const { addItemRefs, handleLayout } = useContext(GalleryContext)
+  const [imageSrc, setImageSrc] = useState<string>()
+
   const ref = useRef<HTMLAnchorElement>(null)
-  const { addItemRefs } = useContext(GalleryContext)
+  const imageRef = useRef<HTMLImageElement>(null)
+
+  const [entry, observer] = useIntersectionObserver(imageRef)
+
+  useEffect(() => {
+    if (entry?.isIntersecting) {
+      const target = entry.target as HTMLImageElement
+      setImageSrc(target.dataset.src)
+      observer?.unobserve(entry.target)
+      handleLayout()
+    }
+  }, [entry, observer])
 
   useEffect(() => {
     addItemRefs(ref)
@@ -54,7 +74,13 @@ const GalleryImage = ({ src, children, href }: React.ImgHTMLAttributes<HTMLImage
   return (
     <AnchorContainer href={href} ref={ref} className="masonry-item">
       <Figure className="figure">
-        <Image className={children ? 'img' : 'img no-caption-img'} src={src} isLoading={false} />
+        <Image
+          ref={imageRef}
+          className={children ? 'img' : 'img no-caption-img'}
+          data-src={src}
+          src={imageSrc}
+          isLoading={false}
+        />
         <figcaption className={children ? 'caption' : ''}>{children}</figcaption>
       </Figure>
     </AnchorContainer>

@@ -21,6 +21,7 @@ const Template: ComponentStory<typeof Gallery> = (args) => {
         height: '100vh',
       }}
     >
+      <div style={{ height: '100vh' }}>hi</div>
       <Gallery {...args}>
         <Gallery.Image href="/" src={shortSrc}>
           <div>Hello</div>
