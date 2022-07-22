@@ -12,16 +12,22 @@ type GalleryProps = {
   children?: React.ReactNode
 }
 
-type InitialValueType = {
+type GalleryContextType = {
   addItemRefs: (entitiy: React.RefObject<HTMLAnchorElement>) => void
   handleLayout: () => void
 }
 
-const GalleryContext = createContext({} as InitialValueType)
+const initialValue: GalleryContextType = {
+  addItemRefs: () => {},
+  handleLayout: () => {},
+}
+
+const GalleryContext = createContext(initialValue)
 
 export const Gallery = ({ children }: GalleryProps) => {
   const ref = useRef<HTMLDivElement>(null)
   const [itemRefs, setItemRefs] = useState<React.RefObject<HTMLAnchorElement>[]>([])
+
   const handleLayout = useCallback(() => {
     itemRefs.forEach((itemRef) => {
       if (!itemRef.current || !ref.current) {
@@ -57,13 +63,14 @@ const GalleryImage = ({ src, children, href }: React.ImgHTMLAttributes<HTMLImage
   const imageRef = useRef<HTMLImageElement>(null)
 
   const [entry, observer] = useIntersectionObserver(imageRef)
+  const debouncedHandleLayout = useDebouncedCallback(handleLayout, 200)
 
   useEffect(() => {
     if (entry?.isIntersecting) {
       const target = entry.target as HTMLImageElement
       setImageSrc(target.dataset.src)
       observer?.unobserve(entry.target)
-      handleLayout()
+      debouncedHandleLayout()
     }
   }, [entry, observer])
 

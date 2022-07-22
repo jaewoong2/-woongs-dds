@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@emotion/react'
-import { LightColor } from './constant'
+import { breakpoint, LightColor } from './constant'
 
 type Props = {
   children: React.ReactNode
@@ -8,6 +8,7 @@ type Props = {
 export const DDSThemeProvider = ({ children }: Props) => {
   const lightTheme = {
     color: LightColor,
+    breakpoint,
   }
 
   return <ThemeProvider theme={lightTheme}>{children}</ThemeProvider>

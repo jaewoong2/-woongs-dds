@@ -13,7 +13,27 @@ export default {
   argTypes: {},
 } as ComponentMeta<typeof Gallery>
 
-const Template: ComponentStory<typeof Gallery> = (args) => {
+const GalleryTest = ({ ...args }) => {
+  return (
+    <Gallery {...args}>
+      <Gallery.Image href="/" src={shortSrc}>
+        <div>Hello</div>
+      </Gallery.Image>
+      <Gallery.Image src={longSrc}>
+        <div>Hello</div>
+        <div>Hello</div>
+        <div>Hello</div>
+      </Gallery.Image>
+      <Gallery.Image src={shortSrc} />
+      <Gallery.Image src={longSrc} />
+      <Gallery.Image src={shortSrc} />
+      <Gallery.Image src={longSrc} />
+      <Gallery.Image src={shortSrc} />
+    </Gallery>
+  )
+}
+
+const Template: ComponentStory<typeof Gallery> = ({ ...args }) => {
   return (
     <div
       style={{
@@ -21,25 +41,38 @@ const Template: ComponentStory<typeof Gallery> = (args) => {
         height: '100vh',
       }}
     >
-      <div style={{ height: '100vh' }}>hi</div>
-      <Gallery {...args}>
-        <Gallery.Image href="/" src={shortSrc}>
-          <div>Hello</div>
-        </Gallery.Image>
-        <Gallery.Image src={longSrc}>
-          <div>Hello</div>
-          <div>Hello</div>
-          <div>Hello</div>
-        </Gallery.Image>
-        <Gallery.Image src={shortSrc} />
-        <Gallery.Image src={longSrc} />
-        <Gallery.Image src={shortSrc} />
-        <Gallery.Image src={longSrc} />
-        <Gallery.Image src={shortSrc} />
-      </Gallery>
+      <GalleryTest {...args} />
+    </div>
+  )
+}
+
+const ScrollTemplate: ComponentStory<typeof Gallery> = ({ ...args }) => {
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '100vh',
+      }}
+    >
+      <div
+        style={{
+          width: '100%',
+          height: '50vh',
+          marginBottom: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        아래로 스크롤 하세요
+      </div>
+      <GalleryTest {...args} />
     </div>
   )
 }
 
 export const Primary = Template.bind({})
 Primary.args = {}
+
+export const ScrollTest = ScrollTemplate.bind({})
+ScrollTest.args = {}

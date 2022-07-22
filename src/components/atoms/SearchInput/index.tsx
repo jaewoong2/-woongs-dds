@@ -14,6 +14,7 @@ export type SearchInputContainer = {
   placeholderColor?: string
   isTyped?: boolean
   boxShadow?: boolean
+  animated?: boolean
 }
 
 type SearchInputProps = {
@@ -35,10 +36,11 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       boxShadow = true,
       placeholderColor = LightColor.searchPlaceholderText,
       icon = (
-        <div style={{ width: '24px', display: 'flex' }}>
+        <div style={{ width: '24px', display: 'flex', cursor: 'pointer' }}>
           <SearchLineIcon />
         </div>
       ),
+      animated = true,
       ...props
     },
     ref,
@@ -56,10 +58,12 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
         isTyped={Boolean(props?.value) ? true : false}
       >
         <Label htmlFor={id}>
-          <PlaceHolder placeholderColor={placeholderColor} className="placeholder">
-            {placeholder}
-          </PlaceHolder>
-          <Input type="search" id={id} ref={ref} {...props} />
+          {animated && (
+            <PlaceHolder placeholderColor={placeholderColor} className="placeholder">
+              {placeholder}
+            </PlaceHolder>
+          )}
+          <Input type="search" placeholder={!animated ? placeholder : ''} id={id} ref={ref} {...props} />
         </Label>
         {size !== 'sm' && icon}
       </InputContainer>

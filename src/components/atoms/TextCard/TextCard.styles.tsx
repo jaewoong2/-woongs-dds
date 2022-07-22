@@ -59,11 +59,8 @@ const getH4Typo = (size: StyleProps['size']) => {
 }
 
 export const Container = styled.section`
-  width: 100%;
-  height: 100%;
+  width: fit-content;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   gap: 5px;
 `

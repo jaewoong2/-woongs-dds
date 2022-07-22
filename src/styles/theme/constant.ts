@@ -18,9 +18,11 @@ export const LightColor = {
   navButtonText: '#999999',
   searchPlaceholderText: '#999999',
   inputPlaceholderText: '#8A8A8A',
+  titleText: '#FCBCBC',
 }
 
 export const breakpoint = {
   mobile: '700px',
+  maxWidth: '1024px',
   desktop: '1268px',
 }
